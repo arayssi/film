@@ -1,15 +1,19 @@
-import React from "react";
-import { Container, Form, InputGroup, Nav, Navbar } from "react-bootstrap";
+import React ,{useState} from "react";
+import {Button, Container, Form, InputGroup, Nav, Navbar } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
+import AddMovie from "../AddMovie/AddMovie";
 
-const NavBar = ({setRatingChange, setSerchInput, ratingChange}) => {
+const NavBar = ({setRatingChange, setSerchInput, ratingChange, newMovie, setNewMovie,handleSave}) => {
   const ratingChanged = (rating) => {
     setRatingChange(rating);
   };
   const handlChange = (e) =>{
     setSerchInput(e.target.value);
   };
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div>
@@ -20,6 +24,7 @@ const NavBar = ({setRatingChange, setSerchInput, ratingChange}) => {
             <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Button variant="light" onClick={handleShow}>  Add new movie</Button>{' '}
           </Nav>
         </Container>
         <InputGroup className="mb-3">
@@ -40,6 +45,7 @@ const NavBar = ({setRatingChange, setSerchInput, ratingChange}) => {
   />
     </InputGroup> { " " }
    </Navbar>
+   <AddMovie show={show} handleClose={handleClose} newMovie={newMovie} setNewMovie={setNewMovie} handleSave={handleSave} setShow={setShow}/>
     </div>
   );
 };
